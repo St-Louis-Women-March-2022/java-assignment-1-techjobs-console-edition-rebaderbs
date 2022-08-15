@@ -73,10 +73,11 @@ public class JobData {
         ArrayList<HashMap<String, String>> jobs = new ArrayList<>();
 
         for (HashMap<String, String> row : allJobs) {
+//added case-insensitive like I did on findByValue so test would pass
+            String aValue = row.get(column).toLowerCase();
+            String search = value.toLowerCase();
 
-            String aValue = row.get(column);
-
-            if (aValue.contains(value)) {
+            if (aValue.contains(search)) {
                 jobs.add(row);
             }
         }
