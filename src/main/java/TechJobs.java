@@ -10,7 +10,7 @@ public class TechJobs {
 
     static Scanner in = new Scanner(System.in);
 
-    public static void main (String[] args) {
+    public static void main(String[] args) {
 
         // Initialize our field map with key/name pairs
         HashMap<String, String> columnChoices = new HashMap<>();
@@ -112,14 +112,40 @@ public class TechJobs {
                 validChoice = true;
             }
 
-        } while(!validChoice);
+        } while (!validChoice);
 
         return choiceKeys[choiceIdx];
     }
 
     // Print a list of jobs
     private static void printJobs(ArrayList<HashMap<String, String>> someJobs) {
+// ArrayList is data type; someJobs is the argument
+        //HashMap is the value type FOR the ArrayList
+        //
+        // 1. need code to run if there are any jobs located within someJobs (1+) - start with if statement for any size > 0 so it will run as long as there is something
+        //ended up switching around if/else statements b/c of the issues I was having with the extra line - wasn't sure that had anything to do with it until I finally figured out the issue
+        if (someJobs.size() == 0) {
+            //put print instead of println and the NoResults test FINALLY passed - I googled for an hour trying alllll types of random things to try and figure this out because it was my only non-passing test - ARGH!
+            //lesson learned: if there is an extra line showing on the test, put print instead of println.......
+            System.out.print("No Results");
+        } else {
+            // 3. for-each loop; job is loop variable "for each job in someJobs, run the following code"
+            for (HashMap<String, String> job : someJobs)    {
 
-        System.out.println("printJobs is not implemented yet");
+                // 4. print out each job exactly as textbook shows; reference each key/value using .getKey() and .getValue() methods
+                // 5. another for-each loop; field is loop variable; will print the Set for each job within the map
+                System.out.println("\n*****"); //blank line
+                for (Map.Entry<String, String> field : job.entrySet())  {
+                    System.out.println(field.getKey() + ": " + field.getValue());
+                }
+                System.out.println("*****"); //no blank line; had to mess around with this to make it look right when testing
+            }
+        }
+        // 2. else statement for when there are no jobs within the .csv file, or something is searched for that doesn't exist (Cancun as a location), No Results will be returned
+//        else {
+//            System.out.println("No Results");
+//        }
+//        System.out.println("printJobs is not implemented yet");
+
     }
 }

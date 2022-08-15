@@ -5,10 +5,7 @@ import org.apache.commons.csv.CSVRecord;
 import java.io.FileReader;
 import java.io.IOException;
 import java.io.Reader;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.HashMap;
-import java.util.List;
+import java.util.*;
 
 /**
  * Created by LaunchCode
@@ -76,10 +73,11 @@ public class JobData {
         ArrayList<HashMap<String, String>> jobs = new ArrayList<>();
 
         for (HashMap<String, String> row : allJobs) {
+//added case-insensitive like I did on findByValue so test would pass
+            String aValue = row.get(column).toLowerCase();
+            String search = value.toLowerCase();
 
-            String aValue = row.get(column);
-
-            if (aValue.contains(value)) {
+            if (aValue.contains(search)) {
                 jobs.add(row);
             }
         }
@@ -99,7 +97,25 @@ public class JobData {
         loadData();
 
         // TODO - implement this method
-        return null;
+//1. create new ArrayList
+        ArrayList<HashMap<String, String>> jobs = new ArrayList<>();
+        //search variable so you can loop through the data to find the search term
+        //change so search result is case-insensitive
+        String search = value.toLowerCase();
+
+        for (HashMap<String, String> row : allJobs) {
+            //depending upon user selection on what type to search for, that is where the loop will search
+            //if the column contains the search value, add to printed jobs results
+            //case-insensitive on columns so search will be accurate but search results still show up as they do in the .csv file
+            for (Map.Entry<String, String> column : row.entrySet())   {
+                if (column.getValue().toLowerCase().contains(search))  {
+                    if (!jobs.contains(row))    {
+                        jobs.add(row);
+                    }
+                }
+            }
+        }
+        return jobs;
     }
 
     /**
