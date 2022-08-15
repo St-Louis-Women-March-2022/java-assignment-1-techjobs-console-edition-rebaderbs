@@ -123,6 +123,7 @@ public class TechJobs {
         //HashMap is the value type FOR the ArrayList
         //
         // 1. need code to run if there are any jobs located within someJobs (1+) - start with if statement for any size > 0 so it will run as long as there is something
+        //ended up switching around if/else statements b/c of the issues I was having with the extra line - wasn't sure that had anything to do with it until I finally figured out the issue
         if (someJobs.size() == 0) {
             //put print instead of println and the NoResults test FINALLY passed - I googled for an hour trying alllll types of random things to try and figure this out because it was my only non-passing test - ARGH!
             //lesson learned: if there is an extra line showing on the test, put print instead of println.......
